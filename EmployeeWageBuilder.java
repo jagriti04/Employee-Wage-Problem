@@ -28,7 +28,7 @@ public class EmployeeWageBuilder{
 			totalEmpHrs += empHours;
 			int empWage = empHours * empRate;					// wage of emp based of working hours 
 			totalEmpWage += empWage;								// wages of emp added
-			System.out.println("Emp wage: " + empWage);
+			System.out.println("Day-"+ totalWorkingDays +" Emp wage: " + empWage);
 		}
 		System.out.println("Total Emp wage for company: "+ company+" " + totalEmpWage);
 		return totalEmpWage;
@@ -37,7 +37,8 @@ public class EmployeeWageBuilder{
 		System.out.println("Welcome to Employee Wage Computation Program");
 
 		calcEmplWageForCompany("DMart", 20, 2, 10);
-		
+		calcEmplWageForCompany("Reliance", 40, 3, 60);
+		calcEmplWageForCompany("IBM", 10, 6, 30);
 
 	}
 }
