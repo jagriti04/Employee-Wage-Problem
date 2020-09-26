@@ -9,6 +9,7 @@ public class EmployeeWageBuilder implements IComputeEmpWage{
 
 	public EmployeeWageBuilder() {
 		companyEmpWageArraylist = new ArrayList<CompanyEmpWage>();
+
 	}
 
 	public void addCompanyEmpWage(String company, int empRatePerHour,
@@ -21,17 +22,26 @@ public class EmployeeWageBuilder implements IComputeEmpWage{
 		for (int i =0; i <companyEmpWageArraylist.size(); i++) {
 			CompanyEmpWage companyEmpWage = companyEmpWageArraylist.get(i);
 			companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
-			System.out.println(companyEmpWage.company+ " total wage is: "+ companyEmpWage.totalEmpWage);
+			System.out.println("Details for company- " +companyEmpWage.company);
+			showDailyWageForCompany(companyEmpWage);
+			System.out.println("Total wage is: "+ companyEmpWage.totalEmpWage);
+		}
+	}
+
+	public void showDailyWageForCompany(CompanyEmpWage companyEmpWage) {
+		for (int i=0; i< companyEmpWage.empDailyWage.size(); i++) {
+			int day = i+1;
+			System.out.println("Daily Wage for day " + day + " = " + companyEmpWage.empDailyWage.get(i));
 		}
 	}
 
 	public int computeEmpWage(CompanyEmpWage companyEmpWage) {
 		// variables 
-		int empHours = 0, totalWorkingDays = 0, totalEmpHrs = 0;
+		int empHours = 0, dailyWage=0, totalWorkingDays = 0, totalEmpHrs = 0;
 		
 		while (totalEmpHrs <= companyEmpWage.maxHoursPerMonth && totalWorkingDays < companyEmpWage.numofWorkingDays) {
 			totalWorkingDays++;
-			int empCheck = (int) Math.floor(Math.random() * 10 ) % 3;      // randomly a number selected 
+			int empCheck = (int) Math.floor(Math.random() * 10 ) % 3;       
 		
 			switch (empCheck) {									// calculates the number of working hours
 				case IS_FULL_TIME:
@@ -45,8 +55,9 @@ public class EmployeeWageBuilder implements IComputeEmpWage{
 				default: 
 					empHours = 0;
 			}
-			totalEmpHrs += empHours;							// wages of emp added
-			System.out.println("Day-"+ totalWorkingDays +" Emp hours: " + empHours);
+			totalEmpHrs += empHours;	
+			dailyWage = empHours * companyEmpWage.empRatePerHour;
+			companyEmpWage.empDailyWage.add(dailyWage);						
 		}
 		
 		return totalEmpHrs * companyEmpWage.empRatePerHour;

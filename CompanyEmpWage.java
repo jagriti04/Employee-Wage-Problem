@@ -1,3 +1,4 @@
+import java.util.*;
 public class CompanyEmpWage {
 	
 	public final String company;
@@ -5,6 +6,8 @@ public class CompanyEmpWage {
 	public final int numofWorkingDays;
 	public final int maxHoursPerMonth;
 	public int totalEmpWage;
+	public ArrayList<Integer> empDailyWage = new ArrayList<Integer>();	// this arraylist will contain daily wage for a company
+
 
 	public CompanyEmpWage(String company,
 				int empRatePerHour, int numofWorkingDays,
@@ -19,4 +22,5 @@ public class CompanyEmpWage {
 	public void setTotalEmpWage(int totalEmpWage) {
 		this.totalEmpWage = totalEmpWage;
 	}
+
 }
